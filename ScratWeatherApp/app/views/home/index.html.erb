@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="myFL">
+<html ng-app="ScratWeatherModule">
 <head>
   <meta charset="utf-8">
   <title>jQuery UI Autocomplete - Default functionality</title>
@@ -45,17 +45,18 @@
       <input id="tags" ng-model="keyss" placeholder=" Enter city or Zip code"> {{keyword}}
     </form>
   </div><!--end logo-->
-  <div id="content" ng-controller="myFlCtrl">
+  <div id="content" ng-controller="ScratWeatherController">
     <div id="primary">
       <h2>Favourite Location</h2>
       <div>
         <ul style="list-style-type: none;">
-          <li ng-repeat="myfavorite in myfavorites track by $index | filter:newCity ">
-            <input type="checkbox" ng-model="myfavorite.done">
-            <a ng-class="{'done':myfavorite.done}" href="index.html.erb/{{myfavorite.city}}">{{myfavorite.city}}</a>
+          <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
+            <input type="checkbox" ng-model="favorite.done">
+            <a ng-class="{'done':favorite.done}" href="index.html.erb/{{favorite.city}}">{{favorite.city}}</a>
           </li>
         </ul>
-        <button ng-click="clearCompleted()" class="myButton">Clear</button>
+        <span style=" font-size: 14px;">Click +  to save cities</span><br>
+        <div style="float: left"><button ng-click="clearCompleted()" class="myButton">Remove</button></div>
       </div>
     </div><!--end primary-->
     <div id="sidebar">
@@ -71,10 +72,11 @@
         <span  style="color:aliceblue">36</span>  <span  style="color:aliceblue"> - </span> <span style="color:aliceblue"> 21 </span> <br>
         <div style="margin-top: 35px; color:aliceblue">
           <span style="font-size: 100px;">28</span>
+          <div style="margin-left: 110px;margin-top: -85px;overflow: hidden;font-size: 26px;">o
+            <button class="myButton">C</button>
+          </div>
         </div>
-        <div style="margin-top: -80px;margin-left: 120px;">
-          <button class="myButton">C</button>
-        </div>
+
       </div><!--end detail-->
 
 
@@ -84,32 +86,32 @@
           <tr>
             <td class="forcastname">Today</td>
             <td><img src="/images/mua.png"></td>
-            <td class="forcastname">36</td>
-            <td>26</td>
+            <td class="forcastname">36 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
+            <td style=" font-size:15px">26 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
           </tr>
           <tr>
             <td class="forcastname">Tomorrow</td>
             <td><img src="/images/mua.png"></td>
-            <td class="forcastname">36</td>
-            <td>26</td>
+            <td class="forcastname">36 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
+            <td  style=" font-size:15px">26 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
           </tr>
           <tr>
             <td class="forcastname">Wednesday</td>
             <td><img src="/images/mua.png"></td>
-            <td class="forcastname">36</td>
-            <td>26</td>
+            <td class="forcastname">36 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
+            <td  style=" font-size:15px">26 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
           </tr>
           <tr>
             <td class="forcastname">Thursday</td>
             <td><img src="/images/mua.png"></td>
-            <td class="forcastname">36</td>
-            <td>26</td>
+            <td class="forcastname">36 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
+            <td  style=" font-size:15px">26 <div  style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
           </tr>
           <tr>
             <td class="forcastname">Friday</td>
             <td><img src="/images/mua.png"></td>
-            <td class="forcastname">36</td>
-            <td>26</td>
+            <td class="forcastname">36 <div style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
+            <td  style=" font-size:15px">26 <div style="margin-top: -27px; font-size: 8px;margin-left: 17px;">o</div></td>
           </tr>
         </table>
       </div><!--end forecast-->

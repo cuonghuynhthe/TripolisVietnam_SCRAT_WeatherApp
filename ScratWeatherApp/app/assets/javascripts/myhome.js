@@ -1,8 +1,8 @@
 
-var myFL = angular.module('myFL',[]);
+var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 
-myFL.controller('myFlCtrl',['$scope',function($scope){
-    $scope.myfavorites = JSON.parse(localStorage.getItem('myfavorites'))||[
+ScratWeatherModule.controller('ScratWeatherController',['$scope',function($scope){
+    $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
         {
             city: "Ho Chi Minh",
             keycity: "HCM",
@@ -17,8 +17,8 @@ myFL.controller('myFlCtrl',['$scope',function($scope){
     var show = false;
     $scope.addTodo= function(){
         var addToArray=true;
-        for(var i=0; i<$scope.myfavorites.length; i++){
-            if($scope.myfavorites[i].city === $scope.keyss){
+        for(var i=0; i<$scope.favoriteslocation.length; i++){
+            if($scope.favoriteslocation[i].city === $scope.keyss){
                 addToArray=false;
             }
         }
@@ -29,7 +29,7 @@ myFL.controller('myFlCtrl',['$scope',function($scope){
                 nullcheck=false;
             }
             if(nullcheck){
-                $scope.myfavorites.push({'city': $scope.keyss,'done':false})
+                $scope.favoriteslocation.push({'city': $scope.keyss,'done':false})
                 $scope.newCity='';
                 show = true;
             }
@@ -37,14 +37,14 @@ myFL.controller('myFlCtrl',['$scope',function($scope){
         }
     }
     $scope.clearCompleted = function(){
-        $scope.myfavorites= $scope.myfavorites.filter(function(item){
+        $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
             return !item.done
         })
     }
     $scope.removeFL = function(){
-        for(var i=0; i<$scope.myfavorites.length; i++) {
-            if($scope.myfavorites[i].city === $scope.keyss){
-                $scope.myfavorites.splice(i,1);
+        for(var i=0; i<$scope.favoriteslocation.length; i++) {
+            if($scope.favoriteslocation[i].city === $scope.keyss){
+                $scope.favoriteslocation.splice(i,1);
                 show = false;
             }
         }
@@ -54,16 +54,12 @@ myFL.controller('myFlCtrl',['$scope',function($scope){
         return show;
     }
 
-    $scope.$watch('myfavorites',function(newValue,oldValue){
+    $scope.$watch('favoriteslocation',function(newValue,oldValue){
         if(newValue!=oldValue){
-            localStorage.setItem('myfavorites',JSON.stringify(newValue))
+            localStorage.setItem('favoriteslocation',JSON.stringify(newValue))
         }
 
     },true)
-
-    $scope.doSomething = function(){
-        $scope.myfavorites.push({'city':$scope.keyss,'done':false})
-    }
 }]);
 
 
