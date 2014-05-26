@@ -1,49 +1,83 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myFL">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Autocomplete - Default functionality</title>
 
+  <script>
+      $(function() {
+          var availableTags = [
+              "ActionScript",
+              "AppleScript",
+              "Asp",
+              "BASIC",
+              "C",
+              "C++",
+              "Clojure",
+              "COBOL",
+              "ColdFusion",
+              "Erlang",
+              "Fortran",
+              "Groovy",
+              "Haskell",
+              "Java",
+              "JavaScript",
+              "Lisp",
+              "Perl",
+              "PHP",
+              "Python",
+              "Ruby",
+              "Scala",
+              "Scheme"
+          ];
+          $( "#tags" ).autocomplete({
+              source: availableTags
+          });
+      });
+  </script>
+</head>
 <body>
 
 <div id="container">
   <div id="logo">
     <form>
-      <label style="color: azure;font-weight: bolder;">SCRAT Weather Forecast  </label>
+      <label  style="color: azure;font-weight: bolder;" for="tags">Scrat Weather Forecast  </label>
       <input id="tags" ng-model="keyss" placeholder=" Enter city or Zip code"> {{keyword}}
     </form>
   </div><!--end logo-->
-  <div id="content">
+  <div id="content" ng-controller="myFlCtrl">
     <div id="primary">
-      <h2>Favourite  Location</h2>
-      <ul  style="list-style-type: none;">
-        <li>
-          <input type="checkbox">
-          <a href="#" >Ho Chi Minh</a>
-        </li>
-        <li>
-          <input type="checkbox">
-          <a href="#">Ha Noi</a>
-        </li>
-        <li>
-          <input type="checkbox">
-          <a href="#">An Giang</a>
-        </li>
-      </ul>
-      <button class="myButton">Clear</button>
+      <h2>Favourite Location</h2>
+      <div>
+        <ul style="list-style-type: none;">
+          <li ng-repeat="myfavorite in myfavorites track by $index | filter:newCity ">
+            <input type="checkbox" ng-model="myfavorite.done">
+            <a ng-class="{'done':myfavorite.done}" href="index.html.erb/{{myfavorite.city}}">{{myfavorite.city}}</a>
+          </li>
+        </ul>
+        <button ng-click="clearCompleted()" class="myButton">Clear</button>
+      </div>
     </div><!--end primary-->
     <div id="sidebar">
+
       <div id="title">
-        <span style="font-size: 29px;color: aliceblue;">Name Location</span>
-        <button class="myButton">+</button>
-      </div>
+        <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{keyss}}</span>
+        <button class="myButton" ng-click="addTodo('{{keyss}}')" ng-hide="showButton()"><strong>+</strong></button>
+        <button class="myButton" ng-click="removeFL('{{keyss}}')" ng-show="showButton()"><strong>-</strong></button>
+      </div><!--end title-->
 
       <div id="detail">
         <span style="margin-bottom: 10px; color:aliceblue">Partly Cloudy</span><br>
         <span  style="color:aliceblue">36</span>  <span  style="color:aliceblue"> - </span> <span style="color:aliceblue"> 21 </span> <br>
         <div style="margin-top: 35px; color:aliceblue">
           <span style="font-size: 100px;">28</span>
+        </div>
+        <div style="margin-top: -80px;margin-left: 120px;">
           <button class="myButton">C</button>
         </div>
+      </div><!--end detail-->
 
-      </div>
+
       <div id="forecast">
         <h2>Forecast</h2>
         <table style="width:450px">
@@ -78,11 +112,12 @@
             <td>26</td>
           </tr>
         </table>
-      </div>
+      </div><!--end forecast-->
+
     </div><!--end sidebar-->
   </div><!--end content-->
   <div id="footer">
-
+    <img src="" alt="Smiley face" height="42" width="42">
   </div><!--end footer-->
 </div><!--end container-->
 </body>

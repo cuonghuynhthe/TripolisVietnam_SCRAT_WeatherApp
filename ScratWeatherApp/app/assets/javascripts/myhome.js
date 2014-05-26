@@ -16,14 +16,38 @@ myFL.controller('myFlCtrl',['$scope',function($scope){
     ]
     var show = false;
     $scope.addTodo= function(){
-        $scope.myfavorites.push({'city': $scope.keyss,'done':false})
-        $scope.newCity='';
-         show = true;
+        var addToArray=true;
+        for(var i=0; i<$scope.myfavorites.length; i++){
+            if($scope.myfavorites[i].city === $scope.keyss){
+                addToArray=false;
+            }
+        }
+        if(addToArray){
+            var nullcheck=true;
+            if( $scope.keyss === null)
+            {
+                nullcheck=false;
+            }
+            if(nullcheck){
+                $scope.myfavorites.push({'city': $scope.keyss,'done':false})
+                $scope.newCity='';
+                show = true;
+            }
+
+        }
     }
     $scope.clearCompleted = function(){
         $scope.myfavorites= $scope.myfavorites.filter(function(item){
             return !item.done
         })
+    }
+    $scope.removeFL = function(){
+        for(var i=0; i<$scope.myfavorites.length; i++) {
+            if($scope.myfavorites[i].city === $scope.keyss){
+                $scope.myfavorites.splice(i,1);
+                show = false;
+            }
+        }
     }
 
     $scope.showButton = function(){
