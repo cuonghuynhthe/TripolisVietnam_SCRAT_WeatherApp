@@ -1,5 +1,9 @@
 ScratWeatherApp::Application.routes.draw do
   root :to => 'home#index'
+  match 'weather/searchweather' => 'weather#search_weather_by_name'
+  match 'weather/getweather/:id' => 'weather#get_weather_by_id'
+  match 'weather/getforecast/:id' => 'weather#get_forecast_by_id'
+  match 'weather/getcoordinateweather' => 'weather#get_weather_by_coordinate'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
