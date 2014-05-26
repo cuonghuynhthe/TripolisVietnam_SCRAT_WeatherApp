@@ -1,10 +1,12 @@
 class WeatherController < ApplicationController
   require 'net/http'
   require 'active_support/json'
+  require 'uri'
   def search_weather_by_name
     query = params[:term]
     if query != ''
-      url = "http://api.openweathermap.org/data/2.5/find?q=#{query}&units=metric&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json"
+      query = URI.escape(query)
+      url = "http://api.openweathermap.org/data/2.5/find?q=#{query}&units=metric&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json&type=like"
       result = Net::HTTP.get(URI.parse(url))
       json_result = ActiveSupport::JSON.decode(result)
       list = ActiveSupport::JSON.encode(json_result['list'])
