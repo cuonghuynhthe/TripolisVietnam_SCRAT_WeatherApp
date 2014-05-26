@@ -6,33 +6,13 @@
 
   <script>
       $(function() {
-          var availableTags = [
-              "ActionScript",
-              "AppleScript",
-              "Asp",
-              "BASIC",
-              "C",
-              "C++",
-              "Clojure",
-              "COBOL",
-              "ColdFusion",
-              "Erlang",
-              "Fortran",
-              "Groovy",
-              "Haskell",
-              "Java",
-              "JavaScript",
-              "Lisp",
-              "Perl",
-              "PHP",
-              "Python",
-              "Ruby",
-              "Scala",
-              "Scheme"
-          ];
           $( "#tags" ).autocomplete({
-              source: availableTags
-          });
+              source: '/weather/searchweather'
+          }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+              return $( "<li>" )
+                      .append( "<a>" + item.name + "<br>" + item.sys.country + "</a>" )
+                      .appendTo( ul );
+          };
       });
   </script>
 </head>
