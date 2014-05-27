@@ -113,7 +113,7 @@ body{
 .myButton {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1tagspx 0px 0px #ffffff;
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
     background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
     background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
@@ -150,3 +150,4 @@ body{
     position:relative;
     top:1px;
 }
+.ui-autocomplete-loading { background:url('/images/loading.gif') no-repeat right center;background-color: #ffffff }

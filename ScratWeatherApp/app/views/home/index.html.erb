@@ -2,15 +2,27 @@
 <html ng-app="ScratWeatherModule">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI Autocomplete - Default functionality</title>
+  <title></title>
 
   <script>
+    var flagURL = 'http://openweathermap.org/images/flags/';
       $(function() {
           $( "#tags" ).autocomplete({
-              source: '/weather/searchweather'
+              source: '/weather/searchweather',
+              focus: function( event, ui ) {
+                  //$(this).val( ui.item.name + ', ' + ui.item.sys.country );
+                  return false;
+              },
+              select: function( event, ui ) {
+                  $(this).val( ui.item.name + ', ' + ui.item.sys.country );
+                  return false;
+              }
           }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
               return $( "<li>" )
-                      .append( "<a>" + item.name + "<br>" + item.sys.country + "</a>" )
+                      .append( "<a>" + "<b>" + item.name + ', ' + item.sys.country + "</b>" +" <img alt='' src='" + flagURL
+                              + item.sys.country.toLowerCase() + ".png"  +  "'/> " + item.weather[0].description
+                              + "<br>" + item.main.temp + '°C' + ' | temperature from ' + item.main.temp_min +'°С'
+                              + ' to ' + item.main.temp_max +'°С' + "</a>" )
                       .appendTo( ul );
           };
       });
@@ -22,7 +34,7 @@
   <div id="logo">
     <form>
       <label  style="color: azure;font-weight: bolder;" for="tags">Scrat Weather Forecast  </label>
-      <input id="tags" ng-model="keyss" placeholder=" Enter city or Zip code"> {{keyword}}
+      <input id="tags" ng-model="keyss" placeholder=" Enter city or Zip code" />
     </form>
   </div><!--end logo-->
   <div id="content" ng-controller="ScratWeatherController">
