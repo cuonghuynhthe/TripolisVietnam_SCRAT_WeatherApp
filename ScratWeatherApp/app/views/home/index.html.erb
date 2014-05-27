@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-
   <script>
     var flagURL = 'http://openweathermap.org/images/flags/';
       $(function() {
@@ -15,6 +14,10 @@
               },
               select: function( event, ui ) {
                   $(this).val( ui.item.name + ', ' + ui.item.sys.country );
+                  scope = angular.element($("#content")).scope();
+                  scope.$apply(function(){
+                      scope.displaySelectedWeather(ui.item);
+                  });
                   return false;
               }
           }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {

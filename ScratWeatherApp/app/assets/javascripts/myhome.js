@@ -60,6 +60,10 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope',function($scope
         }
 
     },true)
+
+    $scope.displaySelectedWeather = function(item){
+        $scope.keyss = item.name + ", " + item.sys.country;
+    }
 }]);
 
 
