@@ -28,13 +28,26 @@
                               + ' to ' + item.main.temp_max +'°С' + "</a>" )
                       .appendTo( ul );
           };
+          $.urlParam = function(name){
+              var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+              return results[1] || 0;
+          }
+         var cityid= $.urlParam('cityid');
+         if(cityid!=null)
+         {
+             $.get( "weather/getweather/"+cityid, function( data ) {
+                 scope = angular.element($("html .ng-scope")).scope();
+                 scope.$apply(function(){
+                     scope.displaySelectedWeather(data);
+                 });
+             }, "json" );
+         }
       });
   </script>
 </head>
 <body>
 
 <div id="container">
-
   <div id="logo">
     <form>
       <label  style="color: azure;font-weight: bolder;" for="tags">Scrat Weather Forecast  </label>
@@ -48,7 +61,7 @@
         <ul style="list-style-type: none;">
           <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
             <input type="checkbox" ng-model="favorite.done">
-            <a ng-class="{'done':favorite.done}" href="#" id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
+            <a ng-class="{'done':favorite.done}" href="?cityid={{favorite.cityid}}" id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
           </li>
         </ul>
         <span style=" font-size: 14px;">Click +  to save cities</span><br>
@@ -101,7 +114,6 @@
     </div><!--end sidebar-->
   </div><!--end content-->
   <div id="footer">
-    <img src="" alt="Smiley face" height="42" width="42">
   </div><!--end footer-->
 </div><!--end container-->
 </body>
