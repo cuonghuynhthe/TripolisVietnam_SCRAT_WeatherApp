@@ -1,7 +1,7 @@
 
 var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 
-ScratWeatherModule.controller('ScratWeatherController',['$scope',function($scope){
+ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
         {
             city: "Ho Chi Minh",
@@ -63,7 +63,16 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope',function($scope
 
     $scope.displaySelectedWeather = function(item){
         $scope.keyss = item.name + ", " + item.sys.country;
+        url = 'weather/getforecast/' + item.id;
+        http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                $scope.forecastData = data;
+            })
     }
+    $scope.convertUnixTimeToUTC = function (item) {
+        return new Date( item * 1000);
+    }
+
 }]);
 
 
