@@ -4,36 +4,24 @@ var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
         {
-            city: "Ho Chi Minh",
-            keycity: "HCM",
-            zcode:'70999'
-        },
-        {
-            city: "Ha Noi",
-            keycity: "HN",
-            zcode:'10999'
+            cityname: "Hanoi",
+            cityid: "1581130",
+            country: "Vietnam",
+            'done': false
         }
     ]
     var show = false;
     $scope.addTodo= function(){
         var addToArray=true;
+
         for(var i=0; i<$scope.favoriteslocation.length; i++){
-            if($scope.favoriteslocation[i].city === $scope.keyss){
+            if($scope.favoriteslocation[i].cityid === $scope.cityid){
                 addToArray=false;
             }
         }
         if(addToArray){
-            var nullcheck=true;
-            if( $scope.keyss === null)
-            {
-                nullcheck=false;
-            }
-            if(nullcheck){
-                $scope.favoriteslocation.push({'city': $scope.keyss,'done':false})
-                $scope.newCity='';
+                $scope.favoriteslocation.push({'cityname': $scope.cityname,'cityid': $scope.cityid,'country': $scope.country,'done':false})
                 show = true;
-            }
-
         }
     }
     $scope.clearCompleted = function(){
@@ -43,7 +31,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     $scope.removeFL = function(){
         for(var i=0; i<$scope.favoriteslocation.length; i++) {
-            if($scope.favoriteslocation[i].city === $scope.keyss){
+            if($scope.favoriteslocation[i].cityid === $scope.cityid){
                 $scope.favoriteslocation.splice(i,1);
                 show = false;
             }
@@ -63,6 +51,14 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
 
     $scope.displaySelectedWeather = function(item){
         $scope.keyss = item.name + ", " + item.sys.country;
+        $scope.country =  item.sys.country;
+        $scope.cityid = item.id;
+        $scope.cityname= item.name;
+        $scope.temp = item.main.temp;
+        $scope.temp_min = item.main.temp_min;
+        $scope.temp_max = item.main.temp_max;
+        $scope.weatherdescription = item.weather[0].description;
+        $scope.iconweather = item.weather[0].icon;
         url = 'weather/getforecast/' + item.id;
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
