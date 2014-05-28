@@ -21,7 +21,21 @@ body{
 #logo form{
     float: left;
 }
-
+#imglogo{
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: -6px;
+    color: #ffffff;
+    float: left
+}
+#titlelogo {
+    color: #FFFFFF;
+    float: left;
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-top: 13px;
+}
 #logo input{
     width: 400px;
     border-radius: 10px;
@@ -39,7 +53,7 @@ body{
 }
 #primary{
     float: left;
-    width:230px;
+    width:208px;
     margin: 15px 10px 50px 15px;
     padding: 10px;
     height: 400px;
@@ -95,8 +109,9 @@ body{
 }
 .tempweather{
     color:aliceblue;
-    margin-left: 8px;
-    width: 55px;
+    width: 150px;
+    overflow: hidden;
+    margin-right: 110px;
 }
 .maintemp{
     margin-top: 35px;

@@ -30,7 +30,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     $scope.clearCompleted = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
-            return !item.done
+            return !item.done;
         })
     }
     $scope.removeFL = function(){
