@@ -14,18 +14,19 @@
               },
               select: function( event, ui ) {
                   $(this).val( ui.item.name + ', ' + ui.item.sys.country );
-                  scope = angular.element($("html .ng-scope")).scope();
+                  scope = getScope();
                   scope.$apply(function(){
                       scope.displaySelectedWeather(ui.item);
                   });
                   return false;
               }
           }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+              scope = getScope();
               return $( "<li>" )
                       .append( "<a>" + "<b>" + item.name + ', ' + item.sys.country + "</b>" +" <img alt='' src='" + flagURL
                               + item.sys.country.toLowerCase() + ".png"  +  "'/> " + item.weather[0].description
-                              + "<br>" + item.main.temp + '°C' + ' | temperature from ' + item.main.temp_min +'°С'
-                              + ' to ' + item.main.temp_max +'°С' + "</a>" )
+                              + "<br>" + item.main.temp + '°' + scope.tempSymbol + ' | temperature from ' + item.main.temp_min +'°'
+                              + scope.tempSymbol + ' to ' + item.main.temp_max + '°' + scope.tempSymbol + "</a>" )
                       .appendTo( ul );
           };
           $.urlParam = function(name){
@@ -43,6 +44,9 @@
              }, "json" );
          }
       });
+    function  getScope() {
+        return angular.element($("html .ng-scope")).scope();
+    }
   </script>
 </head>
 <body>
@@ -92,7 +96,7 @@
         <div class="maintemp">
           <span style="font-size: 100px;">{{temp | number:0}}</span>
           <div style="margin-left: 110px;margin-top: -85px;overflow: hidden;font-size: 26px;">o
-            <button class="myButton">C</button>
+            <button id="btnSwitchTemp" class="myButton" ng-click="switchTemperatureUnit()">C</button>
           </div>
         </div>
 
@@ -105,8 +109,8 @@
           <tr ng-repeat="forecast in forecastData">
             <td class="forcastname">{{ displayForecastDay(forecast.dt) }}</td>
             <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}} "></td>
-            <td class="forcastname">{{forecast.temp.max}}°C</td>
-            <td style=" font-size:15px">{{forecast.temp.min}}°C</td>
+            <td class="forcastname">{{forecast.temp.max}}°{{tempSymbol}}</td>
+            <td style=" font-size:15px">{{forecast.temp.min}}°{{tempSymbol}}</td>
           </tr>
         </table>
       </div><!--end forecast-->
