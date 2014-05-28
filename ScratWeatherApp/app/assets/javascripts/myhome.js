@@ -42,8 +42,6 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
     }
 
-
-
     $scope.$watch('favoriteslocation',function(newValue,oldValue){
         if(newValue!=oldValue){
             localStorage.setItem('favoriteslocation',JSON.stringify(newValue))
@@ -81,7 +79,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
 
     $scope.displayWeatherbySelectFavourite = function(cityid){
-        url = 'weather/getweather/'+cityid;
+        url = '/weather/getweather/' + cityid + "?units=" + $scope.units;
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
                 $scope.displaySelectedWeather(data);

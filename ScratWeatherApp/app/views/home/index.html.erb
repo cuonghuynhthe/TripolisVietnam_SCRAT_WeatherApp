@@ -95,8 +95,8 @@
           <tr ng-repeat="forecast in forecastData">
             <td class="forcastname">{{ displayForecastDay(forecast.dt) }}</td>
             <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}} "></td>
-            <td class="forcastname">{{forecast.temp.max}}°{{tempSymbol}}</td>
-            <td style=" font-size:15px">{{forecast.temp.min}}°{{tempSymbol}}</td>
+            <td class="forcastname">{{forecast.temp.max | number:0 }}°{{tempSymbol}}</td>
+            <td style=" font-size:15px">{{forecast.temp.min | number:0}}°{{tempSymbol}}</td>
           </tr>
         </table>
       </div><!--end forecast-->
