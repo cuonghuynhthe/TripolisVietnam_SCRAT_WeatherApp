@@ -2,6 +2,7 @@
 var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
+    $scope.showcontent = false;
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
         {
             cityname: "Hanoi",
@@ -13,6 +14,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     $scope.units = "metric";
     $scope.tempSymbol = "C";
     var show = false;
+    var showcontent = false;
     $scope.addTodo= function(){
         var addToArray=true;
 
@@ -40,9 +42,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
     }
 
-    $scope.showButton = function(){
-        return show;
-    }
+
 
     $scope.$watch('favoriteslocation',function(newValue,oldValue){
         if(newValue!=oldValue){
@@ -61,6 +61,18 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         $scope.temp_max = item.main.temp_max;
         $scope.weatherdescription = item.weather[0].description;
         $scope.iconweather = item.weather[0].icon;
+        $scope.showcontent = true;
+        showcontent = true;
+        for(var i=0; i<$scope.favoriteslocation.length; i++) {
+            if($scope.favoriteslocation[i].cityid === $scope.cityid){
+                show = true;
+                break;
+            }
+            else
+            {
+                show = false;
+            }
+        }
         url = 'weather/getforecast/' + item.id + "?units=" + $scope.units;
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
@@ -68,6 +80,14 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             })
     }
 
+    $scope.displayWeatherbySelectFavourite = function(cityid){
+        url = 'weather/getweather/'+cityid;
+        http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                $scope.displaySelectedWeather(data);
+            })
+
+    }
     $scope.displayForecastDay = function (date) {
         var weekday = new Array(7);
         weekday[0]=  "Sunday";
@@ -91,7 +111,6 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
         return forecastDay;
     }
-
     $scope.switchTemperatureUnit = function () {
         currentUnit = $scope.units;
         btnSwitchTemp = $("#btnSwitchTemp");
@@ -114,4 +133,13 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
                 $scope.displaySelectedWeather(data);
             })
     }
+    $scope.showButton = function(){
+        return show;
+    }
 }]);
+
+ScratWeatherModule.filter('capitalize', function() {
+    return function(input, all) {
+        return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+});

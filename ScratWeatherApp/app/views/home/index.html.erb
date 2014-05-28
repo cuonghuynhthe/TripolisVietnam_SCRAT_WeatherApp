@@ -29,20 +29,6 @@
                               + scope.tempSymbol + ' to ' + item.main.temp_max + '°' + scope.tempSymbol + "</a>" )
                       .appendTo( ul );
           };
-          $.urlParam = function(name){
-              var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
-              return results[1] || 0;
-          }
-         var cityid= $.urlParam('cityid');
-         if(cityid!=null)
-         {
-             $.get( "weather/getweather/"+cityid, function( data ) {
-                 scope = angular.element($("html .ng-scope")).scope();
-                 scope.$apply(function(){
-                     scope.displaySelectedWeather(data);
-                 });
-             }, "json" );
-         }
       });
     function  getScope() {
         return angular.element($("html .ng-scope")).scope();
@@ -58,6 +44,7 @@
       <input id="tags" ng-model="keyss" placeholder=" Enter city or Zip code" />
     </form>
   </div><!--end logo-->
+
   <div id="content" ng-controller="ScratWeatherController">
     <div id="primary">
       <h2>Favourite Location</h2>
@@ -65,7 +52,7 @@
         <ul style="list-style-type: none;">
           <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
             <input type="checkbox" ng-model="favorite.done">
-            <a ng-class="{'done':favorite.done}" href="?cityid={{favorite.cityid}}" id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
+            <a ng-class="{'done':favorite.done}" href="#" ng-click="displayWeatherbySelectFavourite(favorite.cityid)"  id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
           </li>
         </ul>
         <span style=" font-size: 14px;">Click +  to save cities</span><br>
@@ -73,12 +60,11 @@
       </div>
     </div><!--end primary-->
 
-    <div id="sidebar">
-
+    <div id="sidebar" ng-show="showcontent">
       <div id="title">
         <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{cityname}}</span>
-        <button class="myButton" ng-click="addTodo()" ng-hide="showButton()"><strong>+</strong></button>
-        <button class="myButton" ng-click="removeFL()" ng-show="showButton()"><strong>-</strong></button><br>
+        <button class="myButtonPlus" ng-click="addTodo()" ng-hide="showButton()"><strong>+</strong></button>
+        <button class="myButtonMinus" ng-click="removeFL()" ng-show="showButton()"><strong>-</strong></button><br>
         <span style="font-size: 15px;color: aliceblue;">{{cityname}}, {{country}}</span>
       </div><!--end title-->
 
@@ -87,10 +73,10 @@
           <img src="http://openweathermap.org/img/w/{{iconweather}}">
         </div>
         <div class="descriptionweather">
-          <span>{{weatherdescription}}</span>
+          <span>{{weatherdescription | capitalize}}</span>
         </div>
         <div class="tempweather">
-          <span>{{temp_max}}</span> - <span> {{temp_min}} </span>
+          <span>{{temp_max | number:0 }}°C</span> - <span> {{temp_min  | number:0}}°C </span>
         </div>
 
         <div class="maintemp">
