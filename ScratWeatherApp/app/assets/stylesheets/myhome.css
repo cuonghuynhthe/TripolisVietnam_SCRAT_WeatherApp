@@ -76,7 +76,7 @@ body{
 
 }
 #title{
-    overflow: hidden;
+
 }
 #detail{
     margin-top: 100px;
@@ -95,7 +95,8 @@ body{
 }
 .tempweather{
     color:aliceblue;
-    margin-left: 15px;
+    margin-left: 8px;
+    width: 55px;
 }
 .maintemp{
     margin-top: 35px;
