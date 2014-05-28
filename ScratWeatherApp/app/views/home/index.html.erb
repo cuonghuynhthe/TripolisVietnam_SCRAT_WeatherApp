@@ -34,6 +34,7 @@
 <body>
 
 <div id="container">
+
   <div id="logo">
     <form>
       <label  style="color: azure;font-weight: bolder;" for="tags">Scrat Weather Forecast  </label>
@@ -47,26 +48,36 @@
         <ul style="list-style-type: none;">
           <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
             <input type="checkbox" ng-model="favorite.done">
-            <a ng-class="{'done':favorite.done}" href="index.html.erb/{{favorite.city}}">{{favorite.city}}</a>
+            <a ng-class="{'done':favorite.done}" href="#" id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
           </li>
         </ul>
         <span style=" font-size: 14px;">Click +  to save cities</span><br>
         <div style="float: left"><button ng-click="clearCompleted()" class="myButton">Remove</button></div>
       </div>
     </div><!--end primary-->
+
     <div id="sidebar">
 
       <div id="title">
-        <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{keyss}}</span>
-        <button class="myButton" ng-click="addTodo('{{keyss}}')" ng-hide="showButton()"><strong>+</strong></button>
-        <button class="myButton" ng-click="removeFL('{{keyss}}')" ng-show="showButton()"><strong>-</strong></button>
+        <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{cityname}}</span>
+        <button class="myButton" ng-click="addTodo()" ng-hide="showButton()"><strong>+</strong></button>
+        <button class="myButton" ng-click="removeFL()" ng-show="showButton()"><strong>-</strong></button><br>
+        <span style="font-size: 15px;color: aliceblue;">{{cityname}}, {{country}}</span>
       </div><!--end title-->
 
       <div id="detail">
-        <span style="margin-bottom: 10px; color:aliceblue">Partly Cloudy</span><br>
-        <span  style="color:aliceblue">36</span>  <span  style="color:aliceblue"> - </span> <span style="color:aliceblue"> 21 </span> <br>
-        <div style="margin-top: 35px; color:aliceblue">
-          <span style="font-size: 100px;">28</span>
+        <div class="iconweather">
+          <img src="http://openweathermap.org/img/w/{{iconweather}}">
+        </div>
+        <div class="descriptionweather">
+          <span>{{weatherdescription}}</span>
+        </div>
+        <div class="tempweather">
+          <span>{{temp_max}}</span> - <span> {{temp_min}} </span>
+        </div>
+
+        <div class="maintemp">
+          <span style="font-size: 100px;">{{temp | number:0}}</span>
           <div style="margin-left: 110px;margin-top: -85px;overflow: hidden;font-size: 26px;">o
             <button class="myButton">C</button>
           </div>

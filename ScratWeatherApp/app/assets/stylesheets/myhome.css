@@ -84,6 +84,23 @@ body{
     width:250px;
     float:left;
 }
+.iconweather{
+    float: left;
+    width: 50px;
+}
+.descriptionweather{
+    color: aliceblue;
+    margin-bottom: 5px;
+    margin-top: 14px;
+}
+.tempweather{
+    color:aliceblue;
+    margin-left: 15px;
+}
+.maintemp{
+    margin-top: 35px;
+    color:aliceblue
+}
 #forecast{
     margin-top: 100px;
     margin-left: 5px;
@@ -151,3 +168,19 @@ body{
     top:1px;
 }
 .ui-autocomplete-loading { background:url('/images/loading.gif') no-repeat right center;background-color: #ffffff }
+
+.favouritelink {
+    background-color:transparent;
+    border:0px solid #DADFC1;
+    display:inline-block;
+    cursor:pointer;
+    color:#DADFC1;
+    font-family:arial;
+    font-size:15px;
+    text-decoration:none;
+}
+
+.favouritelink:active {
+    position:relative;
+    top:1px;
+}
