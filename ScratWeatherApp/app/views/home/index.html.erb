@@ -90,8 +90,8 @@
         <h2>Forecast</h2>
         <table style="width:450px">
           <tr ng-repeat="forecast in forecastData">
-            <td class="forcastname">{{ convertUnixTimeToUTC(forecast.dt) | date:'EEEE dd/MM/yyyy hh:mm'}}</td>
-            <td><img src="/images/mua.png"></td>
+            <td class="forcastname">{{ displayForecastDay(forecast.dt) }}</td>
+            <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}} "></td>
             <td class="forcastname">{{forecast.temp.max}}°C</td>
             <td style=" font-size:15px">{{forecast.temp.min}}°C</td>
           </tr>

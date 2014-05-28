@@ -65,12 +65,28 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
                 $scope.forecastData = data;
             })
     }
-    $scope.convertUnixTimeToUTC = function (item) {
-        return new Date( item * 1000);
+
+    $scope.displayForecastDay = function (date) {
+        var weekday = new Array(7);
+        weekday[0]=  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        forecastDate = new Date( date * 1000);
+        currentDate = new Date();
+        currentDay = weekday[currentDate.getDay()];
+        forecastDay = weekday[forecastDate.getDay()];
+        if(currentDay == forecastDay)
+        {
+            return "Today";
+        }
+        if(currentDate.getDay() == forecastDate.getDay() - 1)
+        {
+            return "Tomorrow";
+        }
+        return forecastDay;
     }
-
 }]);
-
-
-
-
