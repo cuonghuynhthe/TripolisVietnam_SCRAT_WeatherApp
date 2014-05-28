@@ -11,6 +11,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             'done': false
         }
     ]
+    $scope.units = "metric";
+    $scope.tempSymbol = "C";
     var show = false;
     var showcontent = false;
     $scope.addTodo= function(){
@@ -71,7 +73,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
                 show = false;
             }
         }
-        url = 'weather/getforecast/' + item.id;
+        url = 'weather/getforecast/' + item.id + "?units=" + $scope.units;
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
                 $scope.forecastData = data;
@@ -109,10 +111,31 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
         return forecastDay;
     }
+    $scope.switchTemperatureUnit = function () {
+        currentUnit = $scope.units;
+        btnSwitchTemp = $("#btnSwitchTemp");
+        if(currentUnit == 'metric')
+        {
+            btnSwitchTemp.html('F');
+            $scope.units = 'imperial';
+            $scope.tempSymbol = "F";
+        }
+        else
+        {
+            btnSwitchTemp.html('C');
+            $scope.units = 'metric';
+            $scope.tempSymbol = "C";
+        }
+        $('#tags').autocomplete("option", { source: '/weather/searchweather?units=' + $scope.units });
+
+        http({method: 'GET', url: 'weather/getweather/' + $scope.cityid + "?units=" + $scope.units})
+            .success(function(data, status, headers, config) {
+                $scope.displaySelectedWeather(data);
+            })
+    }
     $scope.showButton = function(){
         return show;
     }
-
 }]);
 
 ScratWeatherModule.filter('capitalize', function() {

@@ -6,7 +6,11 @@ class WeatherController < ApplicationController
     query = params[:term]
     if query != ''
       query = URI.escape(query)
-      url = "http://api.openweathermap.org/data/2.5/find?q=#{query}&units=metric&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json&type=like"
+      units = params[:units]
+      if units == nil
+        units = 'metric'
+      end
+      url = "http://api.openweathermap.org/data/2.5/find?q=#{query}&units=#{units}&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json&type=like"
       result = Net::HTTP.get(URI.parse(url))
       json_result = ActiveSupport::JSON.decode(result)
       list = ActiveSupport::JSON.encode(json_result['list'])
