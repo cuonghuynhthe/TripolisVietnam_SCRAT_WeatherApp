@@ -72,7 +72,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
 
     $scope.displayWeatherbySelectFavourite = function(cityid){
-        url = '/weather/getweather/' + cityid + "?units=" + $scope.units;
+        var url = '/weather/getweather/' + cityid + "?units=" + $scope.units;
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
                 $scope.displaySelectedWeather(data);
@@ -88,8 +88,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-        forecastDate = new Date( date * 1000);
-        currentDate = new Date();
+        var forecastDate = new Date( date * 1000);
+        var currentDate = new Date();
         currentDay = weekday[currentDate.getDay()];
         forecastDay = weekday[forecastDate.getDay()];
         if(currentDay == forecastDay)
@@ -103,8 +103,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         return forecastDay;
     }
     $scope.switchTemperatureUnit = function () {
-        currentUnit = $scope.units;
-        btnSwitchTemp = $("#btnSwitchTemp");
+        var currentUnit = $scope.units;
+        var btnSwitchTemp = $("#btnSwitchTemp");
         if(currentUnit == 'metric')
         {
             btnSwitchTemp.html('F');

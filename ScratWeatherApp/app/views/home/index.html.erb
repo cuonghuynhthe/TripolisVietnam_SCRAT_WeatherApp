@@ -14,14 +14,14 @@
               },
               select: function( event, ui ) {
                   $(this).val( ui.item.name + ', ' + ui.item.sys.country );
-                  scope = getScope();
+                  var scope = getScope();
                   scope.$apply(function(){
                       scope.displaySelectedWeather(ui.item);
                   });
                   return false;
               }
           }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-              scope = getScope();
+              var scope = getScope();
               return $( "<li>" )
                       .append( "<a>" + "<b>" + item.name + ', ' + item.sys.country + "</b>" +" <img alt='' src='" + flagURL
                               + item.sys.country.toLowerCase() + ".png"  +  "'/> " + item.weather[0].description
