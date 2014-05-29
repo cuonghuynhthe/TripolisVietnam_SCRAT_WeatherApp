@@ -16,8 +16,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     //Initialize default data
     $scope.showcontent = false;
-    $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
-    ]
+    $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[]
     $scope.units = "metric";
     $scope.tempSymbol = "C";
     var show = false;
@@ -41,8 +40,11 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     $scope.removeFavouriteCity = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
-            show = false;
-            return  !item.done;
+            if(item.done==true && item.cityid == $scope.cityid)
+            {
+              show=false;
+            }
+            return !item.done;
         })
     }
     $scope.minusFavouriteCity = function(){
@@ -50,6 +52,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             if($scope.favoriteslocation[i].cityid === $scope.cityid){
                 $scope.favoriteslocation.splice(i,1);
                 show = false;
+                break;
             }
         }
     }

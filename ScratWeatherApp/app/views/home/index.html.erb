@@ -55,7 +55,7 @@
       <h2>Favourite Location</h2>
       <div>
         <ul style="list-style-type: none;">
-          <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
+          <li ng-repeat="favorite in favoriteslocation track by $index">
             <input type="checkbox" ng-model="favorite.done">
             <a ng-class="{'done':favorite.done}" href="javascript:void(0)" ng-click="displayWeatherbySelectFavourite(favorite.cityid)"  id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
           </li>
