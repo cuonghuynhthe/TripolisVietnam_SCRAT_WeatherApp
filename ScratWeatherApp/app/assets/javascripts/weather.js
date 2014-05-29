@@ -27,6 +27,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     $scope.getWeatherByCurrentLocation();
 
     //Controller function definitions
+
     $scope.addFavouriteCity= function(){
         var addToArray=true;
 
@@ -64,11 +65,9 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         if(newValue!=oldValue){
             localStorage.setItem('favoriteslocation',JSON.stringify(newValue))
         }
-
     },true)
 
     $scope.displaySelectedWeather = function(item){
-        $scope.keyss = item.name + ", " + item.sys.country;
         $scope.country =  item.sys.country;
         $scope.cityid = item.id;
         $scope.cityname= item.name;
