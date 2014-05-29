@@ -54,31 +54,31 @@
   </div><!--end logo-->
 
   <div id="content" ng-controller="ScratWeatherController">
-    <div id="primary">
+    <div id="sidebar">
       <h2>Favourite Location</h2>
       <div>
         <ul style="list-style-type: none;">
           <li ng-repeat="favorite in favoriteslocation track by $index | filter:newCity ">
             <input type="checkbox" ng-model="favorite.done">
-            <a ng-class="{'done':favorite.done}" href="#" ng-click="displayWeatherbySelectFavourite(favorite.cityid)"  id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
+            <a ng-class="{'done':favorite.done}" href="javascript:void(0)" ng-click="displayWeatherbySelectFavourite(favorite.cityid)"  id="linkfavourite">{{favorite.cityname}} ({{favorite.country}})</a>
           </li>
         </ul>
         <span style=" font-size: 14px;">Click +  to save cities</span><br>
-        <div style="float: left"><button ng-click="clearCompleted()" class="myButton">Remove</button></div>
+        <div style="float: left"><button ng-click="removeFavouriteCity()" class="myButton">Remove</button></div>
       </div>
-    </div><!--end primary-->
+    </div><!--end sidebar-->
 
-    <div id="sidebar" ng-show="showcontent">
+    <div id="primary" ng-show="showcontent">
       <div id="title">
         <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{cityname}}</span>
-        <button class="myButtonPlus" ng-click="addTodo()" ng-hide="showButton()"><strong>+</strong></button>
-        <button class="myButtonMinus" ng-click="removeFL()" ng-show="showButton()"><strong>-</strong></button><br>
+        <button class="myButtonPlus" ng-click="addFavouriteCity()" ng-hide="showButton()"><strong>+</strong></button>
+        <button class="myButtonMinus" ng-click="minusFavouriteCity()" ng-show="showButton()"><strong>-</strong></button><br>
         <span style="font-size: 15px;color: aliceblue;">{{cityname}}, {{country}}</span>
       </div><!--end title-->
 
       <div id="detail">
         <div class="iconweather">
-          <img src="http://openweathermap.org/img/w/{{iconweather}}">
+          <img src="http://openweathermap.org/img/w/{{iconweather}}.png">
         </div>
         <div class="descriptionweather">
           <span>{{weatherdescription | capitalize}}</span>
@@ -86,17 +86,21 @@
         <div class="tempweather">
           <table style="width:100px">
             <tr>
-              <td width="40px"><img src="/images/arrow-up.png" width="15px"><div style=" font-size: 22px; margin-left: 22px;margin-top: -31px;">{{temp_max | number:0 }}°</div></td>
-              <td width="40px"><img src="/images/arrow-down.png" width="15px"><div style=" font-size: 22px; margin-left: 22px;margin-top: -31px;">{{temp_min  | number:0}}°</div></td>
+              <td><img src="/images/arrow-up.png" width="15px"><div style=" font-size: 22px; margin-left: 22px;margin-top: -31px;">{{temp_max | number:0 }}°</div></td>
+              <td><span style="margin-left:10px"></span></td>
+              <td><img src="/images/arrow-down.png" width="15px"><div style=" font-size: 22px; margin-left: 22px;margin-top: -31px;">{{temp_min  | number:0}}°</div></td>
             </tr>
           </table>
         </div>
 
         <div class="maintemp">
-          <span style="font-size: 100px;">{{temp | number:0}}</span>
-          <div style="margin-left: 110px;margin-top: -85px;overflow: hidden;font-size: 26px;">o
-            <button id="btnSwitchTemp" class="myButton" ng-click="switchTemperatureUnit()">C</button>
-          </div>
+          <table style="width:100px">
+            <tr>
+              <td><span style="font-size: 100px;margin-left: 10px;">{{temp | number:0}}</span></td>
+              <td> <div style="margin-top: -60px;font-size: 26px;">o</div>
+              <div style="margin-top: -22px;margin-left: 19px;"> <button id="btnSwitchTemp" class="myButton" ng-click="switchTemperatureUnit()">C</button></div></td>
+            </tr>
+          </table>
         </div>
 
       </div><!--end detail-->
@@ -107,14 +111,14 @@
         <table style="width:450px">
           <tr ng-repeat="forecast in forecastData">
             <td class="forcastname">{{ displayForecastDay(forecast.dt) }}</td>
-            <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}} "></td>
+            <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}}.png "></td>
             <td class="forcastname">{{forecast.temp.max | number:0 }}°{{tempSymbol}}</td>
             <td style=" font-size:15px">{{forecast.temp.min | number:0}}°{{tempSymbol}}</td>
           </tr>
         </table>
       </div><!--end forecast-->
 
-    </div><!--end sidebar-->
+    </div><!--end primary-->
   </div><!--end content-->
   <div id="footer">
   </div><!--end footer-->

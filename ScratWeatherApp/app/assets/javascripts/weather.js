@@ -4,18 +4,12 @@ var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
     $scope.showcontent = false;
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
-        {
-            cityname: "Hanoi",
-            cityid: "1581130",
-            country: "Vietnam",
-            'done': false
-        }
     ]
     $scope.units = "metric";
     $scope.tempSymbol = "C";
     var show = false;
     var showcontent = false;
-    $scope.addTodo= function(){
+    $scope.addFavouriteCity= function(){
         var addToArray=true;
 
         for(var i=0; i<$scope.favoriteslocation.length; i++){
@@ -28,12 +22,13 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
                 show = true;
         }
     }
-    $scope.clearCompleted = function(){
+    $scope.removeFavouriteCity = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
-            return !item.done;
+            show = false;
+            return  !item.done;
         })
     }
-    $scope.removeFL = function(){
+    $scope.minusFavouriteCity = function(){
         for(var i=0; i<$scope.favoriteslocation.length; i++) {
             if($scope.favoriteslocation[i].cityid === $scope.cityid){
                 $scope.favoriteslocation.splice(i,1);

@@ -51,7 +51,7 @@ body{
     background-image: url(/images/home1.jpg) ;
     background-repeat:no-repeat;
 }
-#primary{
+#sidebar{
     float: left;
     width:208px;
     margin: 15px 10px 50px 15px;
@@ -67,25 +67,25 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 
 }
-#primary h2{
+#sidebar h2{
     color:#a3d2ff;
     font-size: 15px;
     margin-top: -5px;
     border-bottom: 1px solid #F5F2F2;
 }
-#primary ul{
+#sidebar ul{
     margin-left: -15px;
 }
 
-#primary ul li a {
+#sidebar ul li a {
     text-decoration: none;
     color: #DADFC1;
     font-size: 12px;
 }
-#primary button {
+#sidebar button {
     border-radius: 5px;
 }
-#sidebar{
+#primary{
     margin: 15px 0px 0px 0px;
 
 }
@@ -108,13 +108,14 @@ body{
     margin-top: 14px;
 }
 .tempweather{
-    color:aliceblue;
-    width: 150px;
+    color: #F0F8FF;
+    float: left;
     overflow: hidden;
-    margin-right: 110px;
+    width: 150px;
+    margin: -10px 110px 40px 8px;
 }
 .maintemp{
-    margin-top: 35px;
+    float: left;
     color:aliceblue
 }
 #forecast{
