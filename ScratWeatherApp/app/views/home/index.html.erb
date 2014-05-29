@@ -37,6 +37,7 @@
 </head>
 <body>
 <div id="container">
+
   <div id="logo">
     <div id="imglogo">
       <img src="/images/logoScrat.png" height="50px" width="50px">
@@ -69,8 +70,8 @@
     <div id="primary" ng-show="showcontent">
       <div id="title">
         <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{cityname}}</span>
-        <button class="myButtonPlus" ng-click="addFavouriteCity()" ng-hide="showButton()"><strong>+</strong></button>
-        <button class="myButtonMinus" ng-click="minusFavouriteCity()" ng-show="showButton()"><strong>-</strong></button><br>
+         <span class="tooltips"><span>Add to Favourite City</span><button class="myButtonPlus" ng-click="addFavouriteCity()" ng-hide="showButton()" rel="tooltip" data-original-title="Add position"><strong>+</strong></button></span>
+        <span class="tooltips"><span>Remove from Favourite City</span><button class="myButtonMinus" ng-click="minusFavouriteCity(cityid)" ng-show="showButton()" ><strong>-</strong></button></span><br>
         <span style="font-size: 15px;color: aliceblue;">{{cityname}}, {{country}}</span>
       </div><!--end title-->
 
@@ -118,6 +119,8 @@
     </div><!--end primary-->
   </div><!--end content-->
   <div id="footer">
+
+
   </div><!--end footer-->
 </div><!--end container-->
 </body>

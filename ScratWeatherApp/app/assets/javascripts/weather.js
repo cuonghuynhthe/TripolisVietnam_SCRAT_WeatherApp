@@ -6,6 +6,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     $scope.tempSymbol = "C";
     var show = false;
     var showcontent = false;
+
     $scope.addFavouriteCity= function(){
         var addToArray=true;
 
@@ -19,6 +20,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
                 show = true;
         }
     }
+
     $scope.removeFavouriteCity = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
             if(item.done==true && item.cityid == $scope.cityid)
@@ -28,14 +30,14 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             return !item.done;
         })
     }
-    $scope.minusFavouriteCity = function(){
-        for(var i=0; i<$scope.favoriteslocation.length; i++) {
-            if($scope.favoriteslocation[i].cityid === $scope.cityid){
-                $scope.favoriteslocation.splice(i,1);
-                show = false;
-                break;
+    $scope.minusFavouriteCity= function(cityid){
+        $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
+            if(item.cityid == $scope.cityid)
+            {
+                show=false;
             }
-        }
+            return !(item.cityid == cityid);
+        })
     }
 
     $scope.$watch('favoriteslocation',function(newValue,oldValue){
@@ -130,6 +132,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     $scope.showButton = function(){
         return show;
     }
+
 }]);
 
 ScratWeatherModule.filter('capitalize', function() {
