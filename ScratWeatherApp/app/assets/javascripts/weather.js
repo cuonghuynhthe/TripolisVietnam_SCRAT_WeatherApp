@@ -1,6 +1,4 @@
-
 var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
-
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
     $scope.showcontent = false;
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
