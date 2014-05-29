@@ -1,5 +1,20 @@
 var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
+    $scope.getWeatherByCurrentLocation = function() {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(function(position){
+                //alert(position.coords.latitude + ' , ' + position.coords.longitude);
+                url = 'weather/getcoordinateweather?lat=' + position.coords.latitude
+                    + "&lon=" + position.coords.longitude;
+                http({method: 'GET', url: url}).
+                    success(function(data, status, headers, config) {
+                        $scope.displaySelectedWeather(data);
+                    })
+            });
+        }
+    }
+    //Initialize default data
     $scope.showcontent = false;
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[
     ]
@@ -7,6 +22,10 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     $scope.tempSymbol = "C";
     var show = false;
     var showcontent = false;
+    //If user allows to access current location, display the weather of this location
+    $scope.getWeatherByCurrentLocation();
+
+    //Controller function definitions
     $scope.addFavouriteCity= function(){
         var addToArray=true;
 

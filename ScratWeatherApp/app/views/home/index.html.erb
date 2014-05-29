@@ -8,11 +8,10 @@
       $(function() {
           $( "#tags" ).autocomplete({
               source: '/weather/searchweather',
-              focus: function( event, ui ) {
-                  //$(this).val( ui.item.name + ', ' + ui.item.sys.country );
+              focus: function(event, ui) {
                   return false;
               },
-              select: function( event, ui ) {
+              select: function(event, ui) {
                   $(this).val( ui.item.name + ', ' + ui.item.sys.country );
                   var scope = getScope();
                   scope.$apply(function(){
@@ -20,7 +19,7 @@
                   });
                   return false;
               }
-          }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+          }).data( "ui-autocomplete" )._renderItem = function(ul, item) {
               var scope = getScope();
               return $( "<li>" )
                       .append( "<a>" + "<b>" + item.name + ', ' + item.sys.country + "</b>" +" <img alt='' src='" + flagURL
@@ -66,7 +65,7 @@
       </div>
     </div><!--end sidebar-->
 
-    <div id="primary" ng-show="showcontent">
+    <div id="primary" ng-if="showcontent">
       <div id="title">
         <span ng-model="newCity" style="font-size: 29px;color: aliceblue;">{{cityname}}</span>
         <button class="myButtonPlus" ng-click="addFavouriteCity()" ng-hide="showButton()"><strong>+</strong></button>
