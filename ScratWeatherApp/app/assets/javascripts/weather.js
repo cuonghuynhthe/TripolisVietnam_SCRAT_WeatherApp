@@ -16,17 +16,21 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     //Initialize default data
     $scope.showcontent = false;
-    $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[]
+
+
+    $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[] // Create model favoriteslocation parse json localStorage in user's browser
+
     $scope.units = "metric";
     $scope.tempSymbol = "C";
-    var show = false;
-    var showcontent = false;
+    var show = false; // parameter check hide/show button "+" or "-"
+    var showcontent = false; // parameter check show content page (Display current detail weather , forecast location
 
     //If user allows to access current location, display the weather of this location
     $scope.getWeatherByCurrentLocation();
 
     //Controller function definitions
 
+    // Add to favourite city funtion
     $scope.addFavouriteCity= function(){
         var addToArray=true;
 
@@ -41,6 +45,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
     }
 
+
+    // Remove to favourite city funtion
     $scope.removeFavouriteCity = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
             if(item.done==true && item.cityid == $scope.cityid)
@@ -60,6 +66,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         })
     }
 
+
+    // check favoriteslocation data
     $scope.$watch('favoriteslocation',function(newValue,oldValue){
         if(newValue!=oldValue){
             localStorage.setItem('favoriteslocation',JSON.stringify(newValue))
