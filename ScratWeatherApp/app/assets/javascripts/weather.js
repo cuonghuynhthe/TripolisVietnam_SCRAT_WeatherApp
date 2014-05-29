@@ -1,10 +1,10 @@
 var ScratWeatherModule = angular.module('ScratWeatherModule',[]);
 ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',function($scope, http){
+    //This function is used to get the weather data of current location
     $scope.getWeatherByCurrentLocation = function() {
         if (navigator.geolocation)
         {
             navigator.geolocation.getCurrentPosition(function(position){
-                //alert(position.coords.latitude + ' , ' + position.coords.longitude);
                 url = 'weather/getcoordinateweather?lat=' + position.coords.latitude
                     + "&lon=" + position.coords.longitude;
                 http({method: 'GET', url: url}).
@@ -14,6 +14,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             });
         }
     }
+
     //Initialize default data
     $scope.showcontent = false;
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[]
@@ -104,6 +105,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
 
     }
     $scope.displayForecastDay = function (date) {
+        //Define an array of days in a week
         var weekday = new Array(7);
         weekday[0]=  "Sunday";
         weekday[1] = "Monday";
@@ -112,14 +114,20 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
+
+        //Convert unix date to local date
         var forecastDate = new Date( date * 1000);
         var currentDate = new Date();
+
+        //Get the day of week for each forecast day
         currentDay = weekday[currentDate.getDay()];
         forecastDay = weekday[forecastDate.getDay()];
+        //If the forecast day is today, the text will be 'Today'
         if(currentDay == forecastDay)
         {
             return "Today";
         }
+        //If the forecast day is tomorrow, the text will be 'Tomorrow'
         if(currentDate.getDay() == forecastDate.getDay() - 1)
         {
             return "Tomorrow";
@@ -128,19 +136,25 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     }
     $scope.switchTemperatureUnit = function () {
         var currentUnit = $scope.units;
+
+        //Determine current temperature unit
         var btnSwitchTemp = $("#btnSwitchTemp");
         if(currentUnit == 'metric')
         {
+            //Set the F symbol for the switch button
             btnSwitchTemp.html('F');
             $scope.units = 'imperial';
             $scope.tempSymbol = "F";
         }
         else
         {
+            //Set the C symbol for the switch button
             btnSwitchTemp.html('C');
             $scope.units = 'metric';
             $scope.tempSymbol = "C";
         }
+
+        //Change the data source url for the searching text box with appropriate temp unit
         $('#tags').autocomplete("option", { source: '/weather/searchweather?units=' + $scope.units });
 
         http({method: 'GET', url: 'weather/getweather/' + $scope.cityid + "?units=" + $scope.units})

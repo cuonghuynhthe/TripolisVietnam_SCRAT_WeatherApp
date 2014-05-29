@@ -11,6 +11,7 @@ class WeatherController < ApplicationController
       if units == nil
         units = 'metric'
       end
+      #Make a request to the API to get the weather data by searching keyword
       begin
         url = "http://api.openweathermap.org/data/2.5/find?q=#{query}&units=#{units}&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json&type=like"
         result = Net::HTTP.get(URI.parse(url))
@@ -31,6 +32,7 @@ class WeatherController < ApplicationController
     if units == nil || units == ''
       units = 'metric'
     end
+    #Make a request to the API to get weather data by city id
     begin
       url = "http://api.openweathermap.org/data/2.5/weather?id=#{id}&units=#{units}&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json"
       result = Net::HTTP.get(URI.parse(url))
@@ -48,6 +50,7 @@ class WeatherController < ApplicationController
     if units == nil || units == ''
       units = 'metric'
     end
+    #Make a request to the API to get the weather forecast data by city id
     begin
       url = "http://api.openweathermap.org/data/2.5/forecast/daily?id=#{id}&units=#{units}&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json&cnt=5"
       result = Net::HTTP.get(URI.parse(url))
@@ -65,6 +68,7 @@ class WeatherController < ApplicationController
     if units == nil || units == ''
       units = 'metric'
     end
+    #Make a request to the API to get the weather data by current location
     begin
       url = "http://api.openweathermap.org/data/2.5/weather?lat=#{latitude}&lon=#{longitude}&units=#{units}&APPID=7d493d1ebf9bcba3e9877f3f2d816355&mode=json"
       result = Net::HTTP.get(URI.parse(url))
