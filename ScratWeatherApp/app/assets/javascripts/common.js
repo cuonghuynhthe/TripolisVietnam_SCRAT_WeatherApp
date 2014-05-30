@@ -12,6 +12,18 @@ $(function() {
                 scope.displaySelectedWeather(ui.item);
             });
             return false;
+        },
+        response: function( event, ui ) {
+            if (!ui.content.length) {
+                $("#resultMsg").show();
+            }
+            else
+            {
+                $("#resultMsg").hide();
+            }
+        },
+        search: function( event, ui ) {
+            $("#resultMsg").hide();
         }
     }).data( "ui-autocomplete" )._renderItem = function(ul, item) {
         var scope = getScope();

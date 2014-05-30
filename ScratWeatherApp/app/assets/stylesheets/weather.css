@@ -242,3 +242,7 @@ span:hover.tooltips span {
     margin-left: -76px;
     z-index: 999;
 }
+#resultMsg {
+    color: #ff0000;
+    font-weight: bold;
+}
