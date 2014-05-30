@@ -80,8 +80,6 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         $scope.cityid = item.id;
         $scope.cityname= item.name;
         $scope.temp = item.main.temp;
-        $scope.temp_min = item.main.temp_min;
-        $scope.temp_max = item.main.temp_max;
         $scope.weatherdescription = item.weather[0].description;
         $scope.iconweather = item.weather[0].icon;
         $scope.showcontent = true;
@@ -100,6 +98,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         http({method: 'GET', url: url}).
             success(function(data, status, headers, config) {
                 $scope.forecastData = data;
+                $scope.tempmin = data[0].temp.min;
+                $scope.tempmax= data[0].temp.max;
             })
     }
 
