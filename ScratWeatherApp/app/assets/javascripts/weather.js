@@ -167,6 +167,8 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
     scope.showButton = function(){
         return show;
     }
+    // Get datetime
+    scope.datenow= Date.now();
 }]);
 
 ScratWeatherModule.filter('capitalize', function() {
