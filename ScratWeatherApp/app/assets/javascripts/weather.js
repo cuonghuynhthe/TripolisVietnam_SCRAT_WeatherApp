@@ -17,10 +17,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
 
     //Initialize default data
     $scope.showcontent = false;
-
-
     $scope.favoriteslocation = JSON.parse(localStorage.getItem('favoriteslocation'))||[] // Create model favoriteslocation parse json localStorage in user's browser
-
     $scope.units = "metric";
     $scope.tempSymbol = "C";
     var show = false; // parameter check hide/show button "+" or "-"
@@ -46,7 +43,6 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
     }
 
-
     // Remove to favourite city funtion
     $scope.removeFavouriteCity = function(){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
@@ -57,6 +53,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             return !item.done;
         })
     }
+
     $scope.minusFavouriteCity= function(cityid){
         $scope.favoriteslocation= $scope.favoriteslocation.filter(function(item){
             if(item.cityid == $scope.cityid)
@@ -66,7 +63,6 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             return !(item.cityid == cityid);
         })
     }
-
 
     // check favoriteslocation data
     $scope.$watch('favoriteslocation',function(newValue,oldValue){
@@ -111,6 +107,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
             })
 
     }
+    
     $scope.displayForecastDay = function (date) {
         //Define an array of days in a week
         var weekday = new Array(7);
@@ -141,6 +138,7 @@ ScratWeatherModule.controller('ScratWeatherController',['$scope','$http',functio
         }
         return forecastDay;
     }
+
     $scope.switchTemperatureUnit = function () {
         var currentUnit = $scope.units;
 
