@@ -97,6 +97,10 @@ body{
     width:250px;
     float:left;
 }
+.datetime{
+    margin-left: 10px;
+    color: #ffffff
+}
 .iconweather{
     float: left;
     width: 50px;

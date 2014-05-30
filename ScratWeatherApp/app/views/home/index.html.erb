@@ -45,6 +45,9 @@
       </div><!--end title-->
 
       <div id="detail">
+        <div class="datetime"><span>{{datenow | date:'h:mm a'}}</span><br>
+            <span>{{datenow | date:'fullDate'}}</span>
+        </div>
         <div class="iconweather">
           <img src="http://openweathermap.org/img/w/{{iconweather}}.png">
         </div>
